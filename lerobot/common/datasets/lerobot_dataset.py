@@ -726,6 +726,10 @@ class LeRobotDataset(torch.utils.data.Dataset):
         task_idx = item["task_index"].item()
         item["task"] = self.meta.tasks[task_idx]
 
+        # Add conditioning if available in the dataset
+        if "conditioning" in self.meta.episodes[ep_idx]:
+            item["conditioning"] = self.meta.episodes[ep_idx]["conditioning"]
+
         return item
 
     def __repr__(self):

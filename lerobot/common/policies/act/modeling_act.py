@@ -363,7 +363,7 @@ class ACT(nn.Module):
             )
 
         if self.config.conditioning_dim:
-            self.task_embedding_proj = nn.Embedding(config.conditioning_dim, config.dim_model)
+            self.conditioning_proj = nn.Embedding(config.conditioning_dim, config.dim_model)
 
         # Transformer encoder positional embeddings.
         n_1d_tokens = 1  # for the latent
