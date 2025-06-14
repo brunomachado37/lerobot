@@ -503,6 +503,15 @@ class SmolVLAPolicy(PreTrainedPolicy):
         """Tokenize the text input"""
         device = batch[OBS_STATE].device
         tasks = batch["task"]
+
+        color_map = ["white", "black", "red", "green", "blue", "yellow"]
+
+        if "conditioning" in batch:
+            for i, label in enumerate(batch["conditioning"]):
+                mots = tasks[i].split()
+                mots.insert(2, color_map[label])
+                tasks[i] = " ".join(mots)
+
         if isinstance(tasks, str):
             tasks = [tasks]
 
